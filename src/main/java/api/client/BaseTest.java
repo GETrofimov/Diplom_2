@@ -8,11 +8,9 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static api.client.IngredientClient.sendGetIngredientsRequest;
-import static java.util.stream.Collectors.toList;
 import static user.constants.Credentials.*;
 import static api.client.UserClient.*;
 import static common.constants.StatusCodes.ACCEPTED;

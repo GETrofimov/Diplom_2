@@ -14,7 +14,7 @@ import user.body.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateOrderUnauthorizedTest extends OrderClient {
+public class UserOrdersTests extends OrderClient {
     private User user = new User();
     private Order order = new Order();
     private List<String> ingredients = new ArrayList<String>();
@@ -26,14 +26,23 @@ public class CreateOrderUnauthorizedTest extends OrderClient {
         ingredients.add(BaseTest.getIngredients().get(0).get_id());
         ingredients.add(BaseTest.getIngredients().get(1).get_id());
         order.setIngredients(ingredients);
+        sendCreateOrderRequestAuthorized(order, user);
     }
 
     @Test
-    @DisplayName("Создание заказа. Пользователь не авторизован")
-    @Description("Создаем заказ")
-    public void createOrderAuthorizedTest() {
-        Response response = sendCreateOrderRequestUnauthorized(order);
-        assertCreateOrderUnauthorized(response);
+    @DisplayName("Получение заказов пользователя. Пользователь авторизован")
+    @Description("Получаем заказы пользователя")
+    public void getUserOrdersAuthorizedTest() {
+        Response response = sendGetUserOrdersRequestAuthorized(user);
+        assertGetUsersOrdersAuthorized(response);
+    }
+
+    @Test
+    @DisplayName("Получение заказов пользователя. Пользователь не авторизован")
+    @Description("Получаем заказы пользователя")
+    public void getUserOrdersUnauthorizedTest() {
+        Response response = sendGetUserOrdersRequestUnauthorized();
+        assertGetOrdersUnauthorized(response);
     }
 
     @After

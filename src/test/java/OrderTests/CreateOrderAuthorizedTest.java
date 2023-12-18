@@ -2,6 +2,8 @@ package OrderTests;
 
 import api.client.BaseTest;
 import api.client.OrderClient;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import order.body.Order;
 import org.junit.After;
@@ -27,6 +29,8 @@ public class CreateOrderAuthorizedTest extends OrderClient {
     }
 
     @Test
+    @DisplayName("Создание заказа. Пользователь авторизован")
+    @Description("Создаем заказ под пользователем")
     public void createOrderAuthorizedTest() {
         Response response = sendCreateOrderRequestAuthorized(order, user);
         assertCreateOrderAuthorized(response);
