@@ -5,7 +5,9 @@ import io.restassured.response.Response;
 import order.body.Order;
 import user.body.User;
 
-import static common.constants.BaseParams.*;
+import static common.constants.BaseParams.BASE_CONTENT_TYPE_HEADER;
+import static common.constants.BaseParams.BASE_CONTENT_TYPE_VALUE;
+import static common.constants.BaseParams.AUTHORIZATION;
 import static common.constants.StatusCodes.*;
 import static io.restassured.RestAssured.given;
 import static order.constants.Messages.NOT_AUTHORIZED;
@@ -49,10 +51,9 @@ public class OrderClient {
     }
 
     @Step("Получение заказа. Пользователь авторизован")
-    public static Response sendGetUserOrdersRequestAuthorized(User body) {
+    public Response sendGetUserOrdersRequestAuthorized(User body) {
         Response response =
                 given()
-                        .header(BASE_CONTENT_TYPE_HEADER, BASE_CONTENT_TYPE_VALUE)
                         .header(AUTHORIZATION, body.getAccessToken())
                         .when()
                         .get(GET_ORDER);
